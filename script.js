@@ -1,17 +1,24 @@
 function fibonacci(num) {
-    if (num === 0) return 0;
+    // Initialize an array to store Fibonacci numbers with initial known values
+    let memo = [0, 1];
     
-    let prev1 = 0;  // F(0)
-    let prev2 = 1;  // F(1)
-    let current = 0;
-    
-    for (let i = 2; i <= num; i++) {
-        current = prev1 + prev2;
-        prev1 = prev2;
-        prev2 = current;
+    // Recursive function with memoization
+    function fib(n) {
+        if (memo[n] !== undefined) {
+            return memo[n];
+        }
+        
+        memo[n] = fib(n - 1) + fib(n - 2);
+        return memo[n];
     }
     
-    return current;
+    // Edge case for n = 0
+    if (num === 0) {
+        return memo[0];
+    }
+    
+    // Calculate and return the Fibonacci number for num
+    return fib(num);
 }
 
 // Example usage:
